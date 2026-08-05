@@ -1,65 +1,132 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-background">
+      <section className="mx-auto flex min-h-screen max-w-7xl items-center justify-between gap-28 px-8 py-20 lg:px-12">
+        <div className="max-w-xl">
+          <span className="inline-flex items-center rounded-full border border-border bg-muted px-4 py-1 text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            AI-Powered Banking Workspace
+          </span>
+
+          <h1 className="mt-8 text-7xl font-semibold tracking-tight">
+            Aegis
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <h2 className="mt-5 text-3xl font-medium leading-tight tracking-tight">
+            Enterprise AI Banking Intelligence Platform
+          </h2>
+
+          <p className="mt-8 max-w-lg text-lg leading-9 text-muted-foreground">
+            Empowering relationship managers, fraud analysts, and compliance
+            teams with AI-driven customer intelligence, fraud investigation,
+            enterprise knowledge retrieval, and predictive insights.
           </p>
+
+          <div className="mt-14">
+            <Link
+              href="/login"
+              className="group inline-flex items-center gap-3 rounded-xl bg-primary px-10 py-4 text-base font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Enter Workspace
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+
+            <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
+              Secure access for authorized relationship managers, fraud analysts,
+              and compliance officers.
+            </p>
+          </div>
+
+          <div className="mt-16 space-y-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Designed For
+            </p>
+
+            <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
+              <span>Relationship Managers</span>
+              <span>Fraud Analysts</span>
+              <span>Compliance Officers</span>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="w-[560px] rounded-3xl border bg-card p-8 shadow-sm">
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  Enterprise Workspace
+                </p>
+
+                <h3 className="mt-2 text-3xl font-semibold">
+                  Today's AI Brief
+                </h3>
+              </div>
+
+              <div className="rounded-2xl border p-5">
+                <p className="text-sm font-medium text-muted-foreground">
+                  AI Insight
+                </p>
+
+                <p className="mt-3 text-base leading-8">
+                  Maya Iyer&apos;s predicted churn risk has increased to{" "}
+                  <span className="font-semibold">92%</span> after sustained
+                  declines in deposits, reduced digital engagement and recent
+                  complaint activity.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-2xl border p-5">
+                  <p className="text-sm text-muted-foreground">Customers</p>
+                  <p className="mt-2 text-4xl font-semibold">128</p>
+                </div>
+
+                <div className="rounded-2xl border p-5">
+                  <p className="text-sm text-muted-foreground">High Risk</p>
+                  <p className="mt-2 text-4xl font-semibold">9</p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border p-5">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">
+                    Predicted Deposit Trend
+                  </p>
+
+                  <span className="text-sm font-medium">
+                    Next 90 Days
+                  </span>
+                </div>
+
+                <div className="mt-6 flex h-24 items-end gap-2">
+                  {[40,52,68,84,66,48,36,45,20,30,50,60,65,70,45,54,43,32,21].map((h, i) => (
+                    <div
+                      key={i}
+                      className="w-4 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.15)]"
+                      style={{ height: `${h}px` }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border p-5">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Recommended Action
+                </p>
+
+                <p className="mt-3 leading-8">
+                  Schedule a portfolio review within the next 48 hours and
+                  proactively discuss investment and savings options to reduce
+                  predicted churn.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
