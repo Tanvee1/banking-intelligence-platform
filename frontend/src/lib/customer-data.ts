@@ -1,0 +1,1 @@
+export const customers=[{id:1,name:"Maya Iyer",segment:"Affluent",health:"High Risk"},{id:2,name:"Arjun Sharma",segment:"Retail",health:"Healthy"},{id:3,name:"Priya Nair",segment:"Business",health:"Watch"},{id:4,name:"Neha Gupta",segment:"Affluent",health:"Healthy"}];
