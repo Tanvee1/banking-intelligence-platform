@@ -30,19 +30,68 @@ It acts as an autonomous co-pilot that continuously monitors customer accounts, 
 
 ## 🏗️ Technology Architecture
 
-- **Frontend**: Next.js 16 (React 19) + Tailwind CSS v4 (supports Light & Dark Mode).
-- **Backend**: FastAPI (Python 3.12) + SQLite / PostgreSQL.
-- **AI & ML Engine**: LangGraph Agents, FAISS Vector Index, PyMuPDF, Scikit-Learn.
-
 ```mermaid
 flowchart TD
-    User["User Interface (Next.js)"] --> API["FastAPI Backend"]
-    API --> Agent["LangGraph AI Orchestrator"]
-    Agent --> Churn["Churn ML Model"]
-    Agent --> Fraud["Fraud Anomaly SVM"]
-    Agent --> RAG["Policy Vector Search (FAISS)"]
-    Agent --> TS["Time-Series Telemetry"]
-    Agent --> Result["Intelligent Action & Summary"]
+    subgraph Frontend["Frontend Layer (Next.js 16 + React 19)"]
+        UI["Workspace UI (Dashboard, Customer, Fraud, Knowledge)"]
+        AuthUI["Login Page & AuthProvider (JWT Session)"]
+        CopilotUI["Global AI Copilot Drawer"]
+    end
+
+    subgraph Gateway["Backend API Gateway (FastAPI)"]
+        AuthEP["/api/v1/auth/login"]
+        CopilotEP["/api/v1/copilot/query"]
+        DataEPs["/api/v1/customer | /fraud | /knowledge | /timeseries"]
+    end
+
+    subgraph Orchestrator["LangGraph Multi-Agent Orchestrator"]
+        State["Shared AgentState Memory"]
+        RetryLoop["Self-Correction Loop (Max 3 Retries)"]
+        HITL{"Human-in-the-Loop (HITL) Checkpoint (>80% Risk)"}
+        Synth["Report Synthesizer & Citation Engine"]
+    end
+
+    subgraph Engines["AI, ML & Intelligence Tools"]
+        ChurnML["Customer Churn ML Tool (Random Forest)"]
+        FraudSVM["Fraud Anomaly SVM Tool (Isolation Forest)"]
+        RAGEngine["Compliance RAG Tool (PyMuPDF + SentenceTransformer)"]
+        TSEngine["Time-Series Telemetry Tool (Macro Event Correlation)"]
+    end
+
+    subgraph Storage["Database & Vector Storage"]
+        DB[(SQLite / PostgreSQL Database)]
+        FAISSIndex[(FAISS Vector IndexFlatL2)]
+    end
+
+    %% Interactions
+    AuthUI --> AuthEP
+    UI --> DataEPs
+    CopilotUI --> CopilotEP
+
+    AuthEP -- Bcrypt Password Verification --> DB
+    DataEPs --> DB
+
+    CopilotEP --> State
+    State --> Engines
+
+    Engines --> ChurnML
+    Engines --> FraudSVM
+    Engines --> RAGEngine
+    Engines --> TSEngine
+
+    Engines -- Tool Error --> RetryLoop
+    RetryLoop -- Self-Correct & Re-execute --> Engines
+
+    ChurnML --> DB
+    FraudSVM --> DB
+    RAGEngine --> FAISSIndex
+    TSEngine --> DB
+
+    Engines --> HITL
+    HITL -- Risk > 80% (Escalate to Senior RM) --> Synth
+    HITL -- Risk <= 80% (Auto-Pass) --> Synth
+
+    Synth --> CopilotEP
 ```
 
 ---
