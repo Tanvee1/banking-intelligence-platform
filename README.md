@@ -68,7 +68,7 @@ flowchart TD
     UI --> DataEPs
     CopilotUI --> CopilotEP
 
-    AuthEP -- Bcrypt Password Verification --> DB
+    AuthEP -- Password Verification --> DB
     DataEPs --> DB
 
     CopilotEP --> State
@@ -92,6 +92,70 @@ flowchart TD
     HITL -- Risk <= 80% (Auto-Pass) --> Synth
 
     Synth --> CopilotEP
+```
+
+---
+
+## 📁 Project Folder Structure
+
+```
+banking-intelligence-platform/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── v1/
+│   │   │       ├── auth.py               # Authentication & user role session endpoints
+│   │   │       ├── copilot.py            # LangGraph multi-agent copilot API route
+│   │   │       ├── customer.py           # Client profile & churn intelligence API
+│   │   │       ├── fraud.py              # Transaction interception & fraud workstation API
+│   │   │       ├── knowledge.py          # PDF RAG upload & FAISS vector search API
+│   │   │       └── timeseries.py         # Portfolio AUM telemetry & macro correlation API
+│   │   ├── agents/
+│   │   │   ├── langgraph_orchestrator.py # Stateful LangGraph Multi-Agent Orchestrator
+│   │   │   └── tools/
+│   │   │       ├── customer_tool.py      # User's Random Forest Churn ML tool
+│   │   │       ├── fraud_tool.py         # User's One-Class SVM Fraud anomaly tool
+│   │   │       ├── compliance_tool.py    # PyMuPDF + SentenceTransformer FAISS RAG tool
+│   │   │       └── timeseries_tool.py    # Telemetry & macro event correlation tool
+│   │   ├── core/
+│   │   │   ├── config.py                 # System configuration & CORS settings
+│   │   │   └── security.py               # SHA-256 password hashing & JWT auth tokens
+│   │   ├── db/
+│   │   │   ├── init_db.py                # Database initializer & mock data seeder
+│   │   │   ├── models.py                 # SQLAlchemy ORM models (User, Customer, FraudAlert)
+│   │   │   └── session.py                # PostgreSQL 15 & SQLite fallback database engine
+│   │   ├── ml/
+│   │   │   ├── churn_model.pkl           # User's trained Churn model
+│   │   │   ├── encoders.pkl              # Feature label encoders
+│   │   │   ├── scaler.pkl                # Feature standard scaler
+│   │   │   └── svm_model.pkl             # User's trained Fraud SVM model
+│   │   ├── schemas/                      # Pydantic schemas for data validation
+│   │   └── main.py                       # FastAPI server entry point
+│   ├── .env                              # Environment configuration (GEMINI_API_KEY)
+│   └── requirements.txt                  # Python dependencies
+└── frontend/
+    ├── src/
+    │   ├── app/                          # Next.js 16 App Router pages
+    │   │   ├── (auth)/login/             # Sign-in authentication page
+    │   │   ├── customer/                 # Customer Intelligence workstation
+    │   │   ├── dashboard/                # Executive Risk Overview dashboard
+    │   │   ├── fraud/                    # Fraud Interception workstation
+    │   │   ├── knowledge/                # Policy RAG & drag-and-drop PDF upload page
+    │   │   ├── settings/                 # System security & RBAC settings
+    │   │   ├── globals.css               # Design system CSS variables & tokens
+    │   │   ├── layout.tsx                # Root layout wrapper
+    │   │   └── page.tsx                  # Interactive landing page
+    │   ├── components/
+    │   │   ├── common/                   # Shared UI (Modals, Action Buttons, Markdown)
+    │   │   ├── customer/                 # Customer profile & churn components
+    │   │   ├── dashboard/                # Executive KPI grid, charts, AI briefings
+    │   │   ├── fraud/                    # Interception tables, rule configs, telemetry
+    │   │   ├── knowledge/                # Document viewer, PDF modal, search
+    │   │   └── layout/                   # Sidebar, TopNavbar, AppLayout
+    │   ├── providers/                    # AuthProvider & ThemeProvider contexts
+    │   └── services/
+    │       └── api.ts                    # Axios API service client
+    └── package.json                      # Frontend Node.js dependencies
 ```
 
 ---
