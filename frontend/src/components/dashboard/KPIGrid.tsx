@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { TrendingUp, Users, ShieldAlert, CheckCircle2, ArrowUpRight, ArrowDownRight, Maximize2 } from "lucide-react";
+import { TrendingUp, Users, ShieldAlert, CheckCircle2, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { AreaChart, Area, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { ScrollReveal } from "@/components/common/ScrollReveal";
 import { CardModal, ModalData } from "@/components/common/CardModal";
@@ -18,11 +18,11 @@ export function KPIGrid() {
     {
       title: "Total Portfolio AUM",
       value: "₹480.5M",
-      change: "+12.4%",
+      badge: "+12.4%",
       isPositive: true,
-      subtext: "Across 128 Managed Accounts",
+      subtext: "128 Accounts",
       icon: TrendingUp,
-      color: "text-blue-400 bg-blue-500/10 border-blue-500/30",
+      color: "text-blue-400 bg-blue-500/10 border-blue-500/20",
       visualType: "sparkline",
       sparklineData: aumSparkline,
       sparklineColor: "#3b82f6",
@@ -52,11 +52,11 @@ export function KPIGrid() {
     {
       title: "High Churn Risk Clients",
       value: "9 Clients",
-      change: "+2 Clients",
+      badge: "+2 New",
       isPositive: false,
-      subtext: "₹64.2M Portfolio at risk",
+      subtext: "₹64.2M Exposed",
       icon: Users,
-      color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+      color: "text-amber-400 bg-amber-500/10 border-amber-500/20",
       visualType: "bar",
       sparklineData: churnSparkline,
       sparklineColor: "#f59e0b",
@@ -87,11 +87,11 @@ export function KPIGrid() {
     {
       title: "Flagged Fraud Volume",
       value: "₹1.31 Cr",
-      change: "4 Active Cases",
+      badge: "4 Cases",
       isPositive: false,
-      subtext: "100% Intercept Rate",
+      subtext: "100% Intercepted",
       icon: ShieldAlert,
-      color: "text-red-400 bg-red-500/10 border-red-500/30",
+      color: "text-red-400 bg-red-500/10 border-red-500/20",
       visualType: "sparkline",
       sparklineData: fraudSparkline,
       sparklineColor: "#ef4444",
@@ -123,11 +123,11 @@ export function KPIGrid() {
     {
       title: "Compliance Audit Score",
       value: "99.4%",
-      change: "Zero Overdue SARs",
+      badge: "0 Overdue",
       isPositive: true,
-      subtext: "FIU-IND Regulatory Alignment",
+      subtext: "FIU-IND Compliant",
       icon: CheckCircle2,
-      color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+      color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
       visualType: "gauge",
       progressPct: 99.4,
       progressLabel: "99.4% Audit Standard",
@@ -156,55 +156,44 @@ export function KPIGrid() {
 
   return (
     <>
-      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, idx) => {
           const Icon = kpi.icon;
           return (
-            <ScrollReveal key={idx} direction="left" delay={idx * 100}>
+            <ScrollReveal key={idx} direction="left" delay={idx * 60}>
               <div
                 onClick={() => setSelectedModal(kpi.modal)}
-                className="group relative rounded-3xl border border-border bg-card p-6 shadow-md hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1.5 hover:border-blue-500/70 transition-all duration-300 ease-out cursor-pointer space-y-4 overflow-hidden"
+                className="group relative rounded-xl border border-border bg-card p-4 shadow-sm hover:shadow-lg hover:border-blue-500/50 transition duration-150 cursor-pointer flex flex-col justify-between space-y-3.5 overflow-hidden"
               >
-                {/* Header Row */}
+                {/* Header Row: Title & Icon */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-black text-muted-foreground uppercase tracking-widest group-hover:text-foreground transition">
+                  <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
                     {kpi.title}
                   </span>
-                  <div className={`p-3 rounded-2xl border ${kpi.color} group-hover:scale-110 transition duration-300`}>
-                    <Icon size={20} />
+                  <div className={`p-1.5 rounded-lg border ${kpi.color} shrink-0`}>
+                    <Icon className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
-                {/* Metric Number + Visual Combo Row */}
-                <div className="flex items-end justify-between gap-4 pt-1">
-                  <div>
-                    <p className="text-4xl font-black font-mono tracking-tight group-hover:text-blue-400 transition text-foreground">{kpi.value}</p>
-                    <div className="mt-2 flex items-center gap-1.5 text-xs font-black">
-                      <span
-                        className={`flex items-center gap-1 ${
-                          kpi.isPositive ? "text-emerald-400" : "text-amber-400"
-                        }`}
-                      >
-                        {kpi.isPositive ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
-                        {kpi.change}
-                      </span>
-                      <span className="text-muted-foreground font-semibold">({kpi.subtext})</span>
-                    </div>
-                  </div>
+                {/* Middle Row: Value & Mini Sparkline (Compact w-14) */}
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-2xl font-black font-mono tracking-tight text-foreground group-hover:text-blue-500 transition whitespace-nowrap">
+                    {kpi.value}
+                  </p>
 
-                  {/* Right Combo Visual (Sparkline / Mini Bar) */}
+                  {/* Sparkline / Bar Visualization */}
                   {kpi.sparklineData && (
-                    <div className="h-12 w-24 shrink-0">
+                    <div className="h-8 w-14 shrink-0">
                       <ResponsiveContainer width="100%" height="100%">
                         {kpi.visualType === "bar" ? (
                           <BarChart data={kpi.sparklineData}>
-                            <Bar dataKey="v" fill={kpi.sparklineColor} radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="v" fill={kpi.sparklineColor} radius={[2, 2, 0, 0]} />
                           </BarChart>
                         ) : (
                           <AreaChart data={kpi.sparklineData}>
                             <defs>
                               <linearGradient id={`grad-${idx}`} x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor={kpi.sparklineColor} stopOpacity={0.6} />
+                                <stop offset="5%" stopColor={kpi.sparklineColor} stopOpacity={0.5} />
                                 <stop offset="95%" stopColor={kpi.sparklineColor} stopOpacity={0.0} />
                               </linearGradient>
                             </defs>
@@ -212,7 +201,7 @@ export function KPIGrid() {
                               type="monotone"
                               dataKey="v"
                               stroke={kpi.sparklineColor}
-                              strokeWidth={2.5}
+                              strokeWidth={1.5}
                               fillOpacity={1}
                               fill={`url(#grad-${idx})`}
                             />
@@ -222,12 +211,12 @@ export function KPIGrid() {
                     </div>
                   )}
 
-                  {/* Circular Gauge Meter for Audit Score */}
+                  {/* Radial Gauge */}
                   {kpi.visualType === "gauge" && (
-                    <div className="relative h-12 w-12 shrink-0 flex items-center justify-center">
-                      <svg className="h-12 w-12 transform -rotate-90" viewBox="0 0 36 36">
+                    <div className="relative h-8 w-8 shrink-0 flex items-center justify-center">
+                      <svg className="h-8 w-8 transform -rotate-90" viewBox="0 0 36 36">
                         <path
-                          className="text-slate-800"
+                          className="text-muted/60"
                           strokeWidth="3.5"
                           stroke="currentColor"
                           fill="none"
@@ -243,30 +232,39 @@ export function KPIGrid() {
                           d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                         />
                       </svg>
-                      <span className="absolute text-[10px] font-black text-emerald-400 font-mono">99%</span>
+                      <span className="absolute text-[8px] font-bold text-emerald-400 font-mono">99%</span>
                     </div>
                   )}
                 </div>
 
-                {/* Progress Meter Bar */}
-                <div className="pt-2 space-y-1">
-                  <div className="flex items-center justify-between text-[11px] font-extrabold">
-                    <span className="text-muted-foreground">Capacity Meter</span>
-                    <span className="text-foreground font-mono">{kpi.progressLabel}</span>
+                {/* Subtext Row: Badge Pill + Subtext */}
+                <div className="flex items-center gap-2 text-xs">
+                  <span
+                    className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded text-[11px] font-bold border shrink-0 ${
+                      kpi.isPositive
+                        ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
+                        : "bg-amber-500/10 text-amber-500 border-amber-500/20"
+                    }`}
+                  >
+                    {kpi.isPositive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                    {kpi.badge}
+                  </span>
+                  <span className="text-muted-foreground text-[11px] font-medium truncate">{kpi.subtext}</span>
+                </div>
+
+                {/* Bottom Progress Bar & Label (Clean 1-line label) */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                    <span className="font-mono text-foreground font-medium truncate">{kpi.progressLabel}</span>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+                  <div className="h-1 w-full rounded-full bg-muted overflow-hidden">
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${
+                      className={`h-full rounded-full transition-all duration-300 ${
                         kpi.visualType === "gauge" || kpi.isPositive ? "bg-emerald-400" : kpi.progressPct > 50 ? "bg-red-400" : "bg-amber-400"
                       }`}
                       style={{ width: `${kpi.progressPct}%` }}
                     />
                   </div>
-                </div>
-
-                {/* Click to expand prompt overlay */}
-                <div className="pt-1 flex items-center justify-end text-[11px] font-black text-blue-400 opacity-0 group-hover:opacity-100 transition duration-300 gap-1">
-                  Click for Deep Breakdown <Maximize2 size={12} />
                 </div>
               </div>
             </ScrollReveal>

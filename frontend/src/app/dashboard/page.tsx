@@ -11,12 +11,12 @@ import {
 export default function DashboardPage() {
   return (
     <AppLayout>
-      <main className="space-y-8 max-w-[1600px] mx-auto pb-16">
+      <main className="space-y-6 max-w-[1600px] mx-auto pb-12">
         <DashboardHeader />
 
         <KPIGrid />
 
-        <div className="grid gap-8 xl:grid-cols-2 items-stretch">
+        <div className="grid gap-6 xl:grid-cols-2 items-stretch">
           <AIInsights />
           <TrendSection />
         </div>

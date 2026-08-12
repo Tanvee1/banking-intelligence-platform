@@ -51,33 +51,30 @@ export function TrendSection() {
 
   return (
     <>
-      <ScrollReveal direction="left" delay={200}>
+      <ScrollReveal direction="left" delay={200} className="h-full">
         <section
           onClick={() => setSelectedModal(trendModal)}
-          className="group rounded-3xl border border-border bg-card p-8 shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-blue-500/50 transition-all duration-300 ease-out cursor-pointer space-y-6"
+          className="group rounded-2xl border border-border bg-card p-5 shadow-sm hover:shadow-xl hover:border-blue-500/50 transition duration-150 cursor-pointer flex flex-col justify-between space-y-4 h-full"
         >
-          <div className="flex items-center justify-between pb-4 border-b border-border">
+          <div className="flex items-center justify-between pb-3 border-b border-border">
             <div>
-              <h3 className="text-xl font-bold tracking-tight group-hover:text-blue-400 transition">
+              <h3 className="text-base font-bold text-foreground tracking-tight group-hover:text-blue-500 transition">
                 Portfolio AUM & Risk Exposure Trend
               </h3>
-              <p className="text-sm text-muted-foreground">12-Month Trailing Performance & Risk Index</p>
+              <p className="text-xs text-muted-foreground">12-Month Trailing Performance & Risk Index</p>
             </div>
 
-            <div className="flex items-center gap-4 text-xs font-semibold">
+            <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-blue-500" /> Portfolio AUM (₹M)
+                <span className="h-2.5 w-2.5 rounded-full bg-blue-500" /> AUM (₹M)
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-amber-500" /> Risk Index Score
-              </span>
-              <span className="text-blue-500 opacity-0 group-hover:opacity-100 transition flex items-center gap-1">
-                <Maximize2 size={14} /> Expand
+                <span className="h-2.5 w-2.5 rounded-full bg-amber-500" /> Risk Score
               </span>
             </div>
           </div>
 
-          <div className="h-72 w-full pt-4">
+          <div className="h-[210px] w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data}>
                 <defs>
@@ -90,22 +87,22 @@ export function TrendSection() {
                     <stop offset="95%" stopColor="#f59e0b" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <XAxis dataKey="month" stroke="#94a3b8" fontSize={12} tickLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} />
+                <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#0f172a",
-                    borderColor: "#1e293b",
-                    borderRadius: "12px",
-                    color: "#f8fafc",
-                    fontSize: "13px",
+                    backgroundColor: "var(--card)",
+                    borderColor: "var(--border)",
+                    borderRadius: "8px",
+                    color: "var(--foreground)",
+                    fontSize: "12px",
                   }}
                 />
                 <Area
                   type="monotone"
                   dataKey="aum"
                   stroke="#3b82f6"
-                  strokeWidth={3}
+                  strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#aumGrad)"
                 />

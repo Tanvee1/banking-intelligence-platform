@@ -100,10 +100,10 @@ export function DocumentViewer({ selectedDocId, onSelectDoc }: DocumentViewerPro
     <>
       <section
         onClick={handleExpandDoc}
-        className="group rounded-3xl border border-border bg-card p-8 shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-blue-500/50 transition-all duration-300 ease-out cursor-pointer space-y-6"
+        className="group rounded-2xl border border-border bg-card p-5 shadow-sm hover:shadow-xl hover:border-blue-500/50 transition duration-150 cursor-pointer space-y-5"
       >
         {/* Policy Selector Tabs */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 border-b border-border text-sm">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-border text-xs scrollbar-none">
           {mockPolicies.map((p) => (
             <button
               key={p.id}
@@ -111,10 +111,10 @@ export function DocumentViewer({ selectedDocId, onSelectDoc }: DocumentViewerPro
                 e.stopPropagation();
                 onSelectDoc(p.id);
               }}
-              className={`px-4 py-2.5 rounded-xl font-bold transition whitespace-nowrap ${
+              className={`px-3 py-2 rounded-lg font-bold transition whitespace-nowrap ${
                 currentDoc.id === p.id
                   ? "bg-blue-600 text-white shadow-xs"
-                  : "border border-border bg-background text-muted-foreground hover:text-foreground"
+                  : "border border-border bg-muted/40 text-muted-foreground hover:text-foreground"
               }`}
             >
               {p.id} — {p.category}
@@ -123,46 +123,46 @@ export function DocumentViewer({ selectedDocId, onSelectDoc }: DocumentViewerPro
         </div>
 
         {/* Policy Header */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="font-mono text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <span className="font-mono text-[11px] font-bold text-blue-500 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
               {currentDoc.version} • Effective {currentDoc.effectiveDate}
             </span>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-blue-500 opacity-0 group-hover:opacity-100 transition flex items-center gap-1">
-                Click to Expand Full SOP <Maximize2 size={14} />
+                Expand SOP <Maximize2 className="w-3.5 h-3.5" />
               </span>
               <button
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
+                className="flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-foreground transition"
               >
-                <Download size={14} /> Download PDF
+                <Download className="w-3.5 h-3.5" /> Download
               </button>
             </div>
           </div>
 
-          <h2 className="text-2xl font-extrabold tracking-tight text-foreground group-hover:text-blue-400 transition">{currentDoc.title}</h2>
-          <p className="text-sm font-semibold text-blue-400">{currentDoc.clause}</p>
+          <h2 className="text-xl font-bold tracking-tight text-foreground group-hover:text-blue-500 transition leading-snug">{currentDoc.title}</h2>
+          <p className="text-xs font-semibold text-blue-500">{currentDoc.clause}</p>
         </div>
 
         {/* Main Content Paragraphs */}
-        <div className="space-y-4 text-base text-foreground/90 leading-relaxed">
+        <div className="space-y-3 text-sm text-foreground/90 leading-relaxed">
           {currentDoc.content.map((para, idx) => (
-            <p key={idx} className="bg-background p-5 rounded-2xl border border-border/80">
+            <p key={idx} className="bg-muted/40 p-4 rounded-xl border border-border">
               {para}
             </p>
           ))}
         </div>
 
         {/* Mandatory Compliance Steps */}
-        <div className="pt-4 border-t border-border space-y-3">
-          <h4 className="font-bold text-base text-foreground flex items-center gap-2">
-            <ShieldCheck size={18} className="text-emerald-500" /> Mandatory Compliance Protocol Checklist
+        <div className="pt-3 border-t border-border space-y-2.5">
+          <h4 className="font-bold text-sm text-foreground flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-500" /> Mandatory Compliance Protocol Checklist
           </h4>
-          <div className="space-y-2 text-sm text-muted-foreground">
+          <div className="space-y-1.5 text-xs text-foreground/90">
             {currentDoc.mandatorySteps.map((step, i) => (
-              <div key={i} className="flex items-center gap-3 bg-background p-3.5 rounded-xl border border-border/60">
-                <CheckCircle size={16} className="text-emerald-500 shrink-0" />
+              <div key={i} className="flex items-center gap-2.5 bg-muted/40 p-3 rounded-lg border border-border">
+                <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span className="text-foreground font-medium">{step}</span>
               </div>
             ))}

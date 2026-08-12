@@ -120,18 +120,18 @@ export function NextBestActions() {
 
   return (
     <>
-      <section className="rounded-3xl border border-border bg-card p-8 shadow-md space-y-6">
-        <div className="flex items-center justify-between pb-4 border-b border-border">
+      <section className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-border">
           <div>
-            <h3 className="text-xl font-bold tracking-tight">RM Next Best Actions</h3>
-            <p className="text-sm text-muted-foreground">AI Prescriptive Relationship Engagement</p>
+            <h3 className="text-base font-bold text-foreground tracking-tight">RM Next Best Actions</h3>
+            <p className="text-xs text-muted-foreground">AI Prescriptive Relationship Engagement</p>
           </div>
-          <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
-            3 Actions Suggested
+          <span className="text-xs font-semibold text-blue-500 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">
+            3 Actions
           </span>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {actions.map((act) => {
             const Icon = act.icon;
             const isDone = completed[act.id];
@@ -140,43 +140,50 @@ export function NextBestActions() {
               <div
                 key={act.id}
                 onClick={() => setSelectedModal(act.modal)}
-                className="group rounded-2xl border border-border bg-background p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-blue-500/60 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer"
+                className="group rounded-xl border border-border bg-muted/40 p-3.5 hover:border-blue-500/50 hover:bg-muted transition duration-150 cursor-pointer space-y-2"
               >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 group-hover:scale-110 transition duration-300">
-                      <Icon size={18} />
+                {/* Header Row: Icon + Priority + Action Button */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500 border border-blue-500/20 group-hover:scale-105 transition shrink-0">
+                      <Icon className="w-3.5 h-3.5" />
                     </div>
-                    <h4 className="font-bold text-base text-foreground group-hover:text-blue-400 transition">{act.title}</h4>
                     <span
-                      className={`rounded-full px-3 py-0.5 text-xs font-extrabold ${
+                      className={`rounded-md px-2 py-0.5 text-[10px] font-bold border shrink-0 ${
                         act.priority === "Immediate"
-                          ? "bg-red-500/15 text-red-400 border border-red-500/30"
-                          : "bg-amber-500/15 text-amber-400 border border-amber-500/30"
+                          ? "bg-red-500/10 text-red-500 border-red-500/20"
+                          : "bg-amber-500/10 text-amber-500 border-amber-500/20"
                       }`}
                     >
                       {act.priority}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed pl-11">{act.impact}</p>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-xs font-semibold text-blue-500 opacity-0 group-hover:opacity-100 transition flex items-center gap-1">
+                      Expand <Maximize2 className="w-3 h-3" />
+                    </span>
+                    <button
+                      onClick={(e) => handleOpenConfirm(e, act)}
+                      disabled={isDone}
+                      className={`rounded-lg px-3 py-1 font-bold text-xs transition ${
+                        isDone
+                          ? "bg-emerald-500/20 text-emerald-500 cursor-default border border-emerald-500/30"
+                          : "bg-blue-600 text-white hover:bg-blue-500 shadow-xs cursor-pointer"
+                      }`}
+                    >
+                      {isDone ? "Executed" : "Execute Action"}
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className="text-[11px] font-bold text-blue-500 opacity-0 group-hover:opacity-100 transition flex items-center gap-1">
-                    Expand <Maximize2 size={12} />
-                  </span>
-                  <button
-                    onClick={(e) => handleOpenConfirm(e, act)}
-                    disabled={isDone}
-                    className={`rounded-xl px-5 py-2.5 font-bold text-xs transition ${
-                      isDone
-                        ? "bg-emerald-500/20 text-emerald-400 cursor-default border border-emerald-500/30"
-                        : "bg-blue-600 text-white hover:bg-blue-700 shadow-xs cursor-pointer"
-                    }`}
-                  >
-                    {isDone ? "Executed" : "Execute Action"}
-                  </button>
-                </div>
+                {/* Title Line: Full Width, No Truncation */}
+                <h4 className="font-bold text-xs text-foreground group-hover:text-blue-500 transition leading-snug">
+                  {act.title}
+                </h4>
+
+                {/* Impact Description Line */}
+                <p className="text-xs text-muted-foreground leading-relaxed">{act.impact}</p>
               </div>
             );
           })}

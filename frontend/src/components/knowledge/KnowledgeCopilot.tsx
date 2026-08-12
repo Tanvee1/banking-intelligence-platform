@@ -48,32 +48,32 @@ export function KnowledgeCopilot() {
     <>
       <section
         onClick={() => setIsExpanded(true)}
-        className="group rounded-3xl border border-border bg-card p-8 shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-blue-500/50 transition-all duration-300 ease-out cursor-pointer flex flex-col h-[520px]"
+        className="group rounded-2xl border border-border bg-card p-5 shadow-sm hover:shadow-xl hover:border-blue-500/50 transition duration-150 cursor-pointer flex flex-col h-[500px]"
       >
-        <div className="flex items-center justify-between pb-4 border-b border-border">
-          <h3 className="font-bold text-xl tracking-tight flex items-center gap-2 group-hover:text-blue-400 transition">
-            <BookOpen size={22} className="text-blue-500 group-hover:scale-110 transition duration-300" /> Policy RAG Copilot
+        <div className="flex items-center justify-between pb-3 border-b border-border">
+          <h3 className="font-bold text-base tracking-tight text-foreground flex items-center gap-2 group-hover:text-blue-500 transition">
+            <BookOpen className="w-5 h-5 text-blue-500 group-hover:scale-105 transition" /> Policy RAG Copilot
           </h3>
-          <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
-            <span className="text-sm font-mono text-muted-foreground">Internal SOP Index v2026.2</span>
+          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+            <span className="text-xs font-mono text-muted-foreground">Internal SOP Index v2026.2</span>
             <button
               onClick={() => setIsExpanded(true)}
-              className="p-2 rounded-xl border border-border bg-background hover:bg-muted text-blue-400 transition flex items-center gap-1.5 text-xs font-bold"
+              className="p-1.5 rounded-lg border border-border bg-background hover:bg-muted text-blue-500 transition flex items-center gap-1 text-xs font-bold"
               title="Expand Chat Window"
             >
-              <Maximize2 size={14} /> Expand Chat
+              <Maximize2 className="w-3.5 h-3.5" /> Expand Chat
             </button>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto space-y-4 pr-2 text-base">
+        <div className="flex-1 overflow-y-auto space-y-3 py-3 pr-1 text-xs">
           {messages.map((m, i) => (
             <div
               key={i}
-              className={`p-5 rounded-2xl max-w-[85%] leading-relaxed ${
+              className={`p-4 rounded-xl max-w-[88%] leading-relaxed ${
                 m.sender === "user"
                   ? "bg-blue-600 text-white font-medium ml-auto rounded-br-none"
-                  : "bg-background border border-border text-foreground rounded-bl-none"
+                  : "bg-muted/70 border border-border text-foreground rounded-bl-none font-medium"
               }`}
             >
               <p className="whitespace-pre-wrap">{m.text}</p>
@@ -81,13 +81,13 @@ export function KnowledgeCopilot() {
           ))}
         </div>
 
-        <div className="pt-4 border-t border-border space-y-4" onClick={(e) => e.stopPropagation()}>
-          <div className="flex gap-2 overflow-x-auto text-sm pb-1">
+        <div className="pt-3 border-t border-border space-y-3" onClick={(e) => e.stopPropagation()}>
+          <div className="flex gap-1.5 overflow-x-auto text-xs pb-1 scrollbar-none">
             {suggested.map((s, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(s)}
-                className="rounded-xl border border-border bg-background px-3.5 py-2 text-sm font-medium hover:bg-muted hover:border-blue-500/40 whitespace-nowrap transition cursor-pointer"
+                className="rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-blue-500/40 whitespace-nowrap transition cursor-pointer"
               >
                 {s}
               </button>
@@ -99,20 +99,20 @@ export function KnowledgeCopilot() {
               e.preventDefault();
               handleSend(input);
             }}
-            className="flex gap-3"
+            className="flex gap-2"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask a policy or compliance question..."
-              className="flex-1 rounded-xl border border-border bg-background px-4 py-3.5 text-base outline-none focus:border-blue-500 transition"
+              className="flex-1 rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-blue-500 transition"
             />
             <button
               type="submit"
-              className="rounded-xl bg-blue-600 px-6 py-3.5 text-base font-bold text-white hover:bg-blue-700 transition flex items-center gap-2 cursor-pointer"
+              className="rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-blue-500 transition flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
-              Send <Send size={16} />
+              Send <Send className="w-3.5 h-3.5" />
             </button>
           </form>
         </div>

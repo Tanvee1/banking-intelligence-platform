@@ -10,7 +10,7 @@ export function ProductHoldings() {
   const products = [
     {
       title: "Imperial Savings Account",
-      type: "Deposit",
+      type: "Deposit Account",
       val: "₹42.8 Lakhs",
       status: "Active",
       icon: Landmark,
@@ -116,31 +116,31 @@ export function ProductHoldings() {
 
   return (
     <>
-      <section className="rounded-3xl border border-border bg-card p-8 shadow-md space-y-6">
-        <div className="flex items-center justify-between pb-4 border-b border-border">
-          <h3 className="text-xl font-bold tracking-tight">Active Product Holdings</h3>
-          <span className="text-sm font-semibold text-muted-foreground">6 Banking Products</span>
+      <section className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-border">
+          <h3 className="text-base font-bold text-foreground tracking-tight">Active Product Holdings</h3>
+          <span className="text-xs font-medium text-muted-foreground">6 Banking Products</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {products.map((p, i) => {
             const Icon = p.icon;
             return (
               <div
                 key={i}
                 onClick={() => setSelectedModal(p.modal)}
-                className="group rounded-2xl border border-border bg-background p-5 flex items-center gap-4 hover:border-blue-500/60 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer"
+                className="group rounded-xl border border-border bg-muted/40 p-4 flex items-center gap-3.5 hover:border-blue-500/50 hover:bg-muted transition-all duration-150 cursor-pointer"
               >
-                <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 group-hover:scale-110 transition duration-300 shrink-0">
-                  <Icon size={22} />
+                <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-500 border border-blue-500/20 group-hover:scale-105 transition shrink-0">
+                  <Icon className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-bold text-base text-foreground truncate group-hover:text-blue-400 transition">{p.title}</h4>
-                    <Maximize2 size={12} className="text-blue-500 opacity-0 group-hover:opacity-100 transition shrink-0 ml-1" />
+                  <div className="flex items-center justify-between gap-1">
+                    <h4 className="font-semibold text-xs text-foreground group-hover:text-blue-500 transition leading-snug line-clamp-1">{p.title}</h4>
+                    <Maximize2 className="w-3 h-3 text-blue-500 opacity-0 group-hover:opacity-100 transition shrink-0" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">{p.type}</p>
-                  <p className="text-base font-extrabold font-mono mt-1 text-foreground">{p.val}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">{p.type}</p>
+                  <p className="text-xs font-bold font-mono mt-1 text-foreground">{p.val}</p>
                 </div>
               </div>
             );

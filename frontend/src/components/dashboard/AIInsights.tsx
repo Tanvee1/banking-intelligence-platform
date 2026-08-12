@@ -55,49 +55,46 @@ export function AIInsights() {
 
   return (
     <>
-      <ScrollReveal direction="left" delay={150}>
-        <section className="rounded-3xl border border-border bg-card p-8 shadow-md space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-border">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-blue-600 text-white shadow-xs">
-                <Sparkles size={20} />
+      <ScrollReveal direction="left" delay={150} className="h-full">
+        <section className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-4 flex flex-col justify-between h-full">
+          <div className="flex items-center justify-between pb-3 border-b border-border">
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-blue-600 text-white shadow-xs">
+                <Sparkles className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="text-xl font-bold tracking-tight">AI Executive Morning Briefing</h3>
-                <p className="text-sm text-muted-foreground">Synthesized Multi-Agent Risk Reasoning</p>
+                <h3 className="text-base font-bold text-foreground tracking-tight">AI Executive Morning Briefing</h3>
+                <p className="text-xs text-muted-foreground">Synthesized Multi-Agent Risk Reasoning</p>
               </div>
             </div>
 
-            <span className="text-xs font-bold font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full">
-              DeepRisk v4.2 Synthesis
+            <span className="text-[11px] font-semibold text-blue-500 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full whitespace-nowrap">
+              DeepRisk v4.2
             </span>
           </div>
 
-          <div className="space-y-4 text-base text-foreground/90 leading-relaxed font-normal">
+          <div className="space-y-3 flex-1 flex flex-col justify-center">
             {/* Item 1 */}
             <div
               onClick={() => setSelectedModal(insightModalMaya)}
-              className="group p-5 rounded-2xl bg-background border border-border hover:border-amber-500/50 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer space-y-2"
+              className="group p-3.5 rounded-xl bg-muted/50 border border-border hover:border-amber-500/50 hover:bg-muted transition duration-150 cursor-pointer space-y-1.5"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-amber-500 flex items-center gap-1.5">
-                  <AlertTriangle size={16} /> High Churn Risk Identified
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-bold text-amber-500 flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0" /> High Churn Risk Identified
                 </span>
-                <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition">Maya Iyer (CUST-40921)</span>
+                <span className="text-[11px] font-mono text-muted-foreground group-hover:text-foreground transition shrink-0">Maya Iyer (CUST-40921)</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-foreground/90 leading-relaxed">
                 Maya Iyer&apos;s predicted churn risk has reached <strong className="text-foreground font-bold">92%</strong> following sustained deposit declines (-₹45L in 30 days) and 2 unresolved service complaints regarding wire transfer limits.
               </p>
-              <div className="pt-2 flex items-center justify-between">
-                <span className="text-[11px] font-bold text-blue-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition duration-300">
-                  Click to Expand <Maximize2 size={12} />
-                </span>
+              <div className="pt-1 flex items-center justify-end">
                 <Link
                   href="/customer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-xs font-bold text-blue-500 hover:underline flex items-center gap-1"
+                  className="text-xs font-semibold text-blue-500 hover:underline flex items-center gap-1"
                 >
-                  Inspect Customer Intelligence <ArrowRight size={14} />
+                  Inspect Customer Intelligence <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -105,27 +102,24 @@ export function AIInsights() {
             {/* Item 2 */}
             <div
               onClick={() => setSelectedModal(insightModalSwift)}
-              className="group p-5 rounded-2xl bg-background border border-border hover:border-red-500/50 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer space-y-2"
+              className="group p-3.5 rounded-xl bg-muted/50 border border-border hover:border-red-500/50 hover:bg-muted transition duration-150 cursor-pointer space-y-1.5"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-red-500 flex items-center gap-1.5">
-                  <AlertTriangle size={16} /> Critical Fraud Wire Intercepted
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-bold text-red-500 flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0" /> Critical Fraud Wire Intercepted
                 </span>
-                <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition">CASE-8945-TXN</span>
+                <span className="text-[11px] font-mono text-muted-foreground group-hover:text-foreground transition shrink-0">CASE-8945-TXN</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-foreground/90 leading-relaxed">
                 Aegis Interception Engine automatically froze a <strong className="text-foreground font-bold">₹1.25 Crore ($150k USD)</strong> SWIFT wire transfer targeted to Apex Offshore LLC in the Cayman Islands following an RDP session hijack.
               </p>
-              <div className="pt-2 flex items-center justify-between">
-                <span className="text-[11px] font-bold text-red-400 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition duration-300">
-                  Click to Expand <Maximize2 size={12} />
-                </span>
+              <div className="pt-1 flex items-center justify-end">
                 <Link
                   href="/fraud"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-xs font-bold text-red-400 hover:underline flex items-center gap-1"
+                  className="text-xs font-semibold text-red-500 hover:underline flex items-center gap-1"
                 >
-                  Open Fraud Workstation <ArrowRight size={14} />
+                  Open Fraud Workstation <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

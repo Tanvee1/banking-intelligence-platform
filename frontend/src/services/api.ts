@@ -20,3 +20,35 @@ export async function fetchCopilotQuery(query: string, domainFilter: string = "a
     return null;
   }
 }
+
+export async function fetchTimeSeriesTelemetry(customerId: string) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/timeseries/${customerId}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
+    console.warn("FastAPI Backend offline, using local time-series fallback", error);
+    return null;
+  }
+}
+
+export async function loginUser(email: string, password: string = "password123", role?: string) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, role }),
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      return { error: errData.detail || "Authentication failed. Invalid email or password." };
+    }
+    return await res.json();
+  } catch (error) {
+    console.warn("FastAPI Auth offline", error);
+    return null;
+  }
+}

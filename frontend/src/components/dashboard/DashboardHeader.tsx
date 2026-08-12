@@ -1,28 +1,28 @@
 "use client";
 
-import { ShieldCheck, Download, Sparkles, RefreshCw } from "lucide-react";
+import { ShieldCheck, Download, RefreshCw } from "lucide-react";
 
 export function DashboardHeader() {
   return (
-    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-border">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border">
       <div>
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-extrabold tracking-tight">Executive Intelligence Briefing</h1>
-          <span className="rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-3 py-1 text-xs font-bold flex items-center gap-1.5">
-            <ShieldCheck size={14} /> Risk Level: Normal
+        <div className="flex items-center gap-2.5">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">Executive Intelligence Briefing</h1>
+          <span className="rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-2.5 py-0.5 text-[11px] font-semibold flex items-center gap-1">
+            <ShieldCheck className="w-3.5 h-3.5" /> Normal Risk
           </span>
         </div>
-        <p className="text-base text-muted-foreground mt-1">
+        <p className="text-xs text-muted-foreground mt-0.5">
           Aegis AI Multi-Agent Risk Engine • Real-Time Enterprise Banking Overview
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
-        <button className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold hover:bg-muted transition shadow-xs">
-          <RefreshCw size={16} /> Sync Data
+      <div className="flex items-center gap-2">
+        <button className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted transition cursor-pointer">
+          <RefreshCw className="w-3.5 h-3.5" /> Sync Data
         </button>
-        <button className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-700 transition shadow-xs">
-          <Download size={16} /> Export Risk Report
+        <button className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-blue-500 transition shadow-sm cursor-pointer">
+          <Download className="w-3.5 h-3.5" /> Export Report
         </button>
       </div>
     </div>
